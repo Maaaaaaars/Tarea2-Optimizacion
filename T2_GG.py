@@ -27,15 +27,14 @@ for i in V:
 for j in V:
     problemaGG += pulp.lpSum(x[(i, j)] for i in V if i != j) == 1
 
-for i in V:
-    for j in V:
-        if i != j:
-            problemaGG += c[i] - c[j] + n * x[(i, j)] <= n - 1
+for i in V[1:]:
+    problemaGG += pulp.lpSum(g[(i, j)] for j in V if i != j) - pulp.lpSum(g[(j, i)] for j in V if i != j) == 1
 
 for i in V:
     for j in V:
-        if i != j and (i, j) != (0, 1):
-            problemaGG += x[(i, j)] + x[(j, i)] <= 1
+        if i != j:
+            problemaGG += g[(i, j)] >= 0
+            problemaGG += g[(i, j)] <= (n - 1) * x[(i, j)]
 
 
 # Resolver el problema
