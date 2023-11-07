@@ -16,7 +16,7 @@ A = [(i, j) for i in V for j in V if i != j] # Aristas
 
 # Variables binarias x_ij
 x = pulp.LpVariable.dicts("x", A, 0, 1, pulp.LpBinary)
-c = pulp.LpVariable.dicts("c", V, 0, n, pulp.LpInteger )
+u = pulp.LpVariable.dicts("u", V, 0, n, pulp.LpInteger )
 
 problemaMTZ += pulp.lpSum(C[i][j] * x[(i, j)] for (i, j) in A)
 
@@ -30,7 +30,7 @@ for j in V:
 for i in V:
     for j in V:
         if(i!=j and i>=1):
-            problemaMTZ += c[i]-c[j]+1<=n*(1-x[(i,j)])
+            problemaMTZ += u[i]-u[j]+1<=n*(1-x[(i,j)])
 
 # Resolver el problema
 problemaMTZ.solve()
