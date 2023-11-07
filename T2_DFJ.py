@@ -27,11 +27,10 @@ for i in V:
 for j in V:
     problemaDFJ += pulp.lpSum(x[(i, j)] for i in V if i != j) == 1
 
-S = [set(s) for r in range(2, n) for s in combinations(V, r)]
 
-for s in S:
-    for i in s:
-        problemaDFJ += pulp.lpSum(x[(i, j)] for j in s if i != j) <= len(s) - 1
+for s in range(2, n):
+    for S in combinations(range(n), s):
+        problemaDFJ += pulp.lpSum([x[i, j] for i in S for j in S if i != j]) <= len(S) - 1
 
 # Resolver el problema
 problemaDFJ.solve()
