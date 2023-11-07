@@ -16,7 +16,7 @@ A = [(i, j) for i in V for j in V if i != j] # Aristas
 
 # Variables binarias x_ij
 x = pulp.LpVariable.dicts("x", A, 0, 1, pulp.LpBinary)
-c = pulp.LpVariable.dicts("c", V, 0, n, pulp.LpInteger )
+#c = pulp.LpVariable.dicts("c", V, 0, n, pulp.LpInteger )
 
 problemaDFJ += pulp.lpSum(C[i][j] * x[(i, j)] for (i, j) in A)
 
