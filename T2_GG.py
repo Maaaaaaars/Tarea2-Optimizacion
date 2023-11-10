@@ -7,9 +7,12 @@ from matrix import *
 # Crear un problema de minimización
 problemaGG = pulp.LpProblem("CMA_DFJ", pulp.LpMinimize)
 
+# Leer la matriz de costos desde un archivo
+with open('m14a.txt', 'r') as f:
+    matrix = [[int(num) for num in line.split()] for line in f]
+
 #Matriz de costos
-matriz = Matrices()
-C=matriz.m10a
+C = matrix
 
 # Conjuntos de nodos y aristas
 n=len(C) # Tamaño del problema
