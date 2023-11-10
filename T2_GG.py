@@ -1,6 +1,5 @@
 import pulp
 from itertools import combinations
-from matrix import *
 
 # Formulación DFJ
 
